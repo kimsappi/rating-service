@@ -8,4 +8,4 @@ const getAllActiveOrderedByRating = async () => {
 
 module.exports = {
   getAllActiveOrderedByRating,
-}
+};

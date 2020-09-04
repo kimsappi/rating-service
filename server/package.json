@@ -3,8 +3,9 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "node ./bin/www",
-    "dev": "nodemon ./bin/www",
+    "start": "NODE_ENV=production node ./bin/www",
+    "dev": "NODE_ENV=development nodemon ./bin/www",
+    "test": "NODE_ENV=test jest --verbose --runInBand",
     "lint": "eslint . --fix"
   },
   "dependencies": {
@@ -14,14 +15,19 @@
     "express": "~4.16.1",
     "http-errors": "~1.6.3",
     "jade": "~1.11.0",
+    "jsonwebtoken": "^8.5.1",
+    "jws": "^4.0.0",
     "morgan": "~1.9.1",
     "pg": "^8.3.3",
     "pg-types": "^3.0.1"
   },
   "devDependencies": {
     "eslint": "^7.8.1",
+    "import-local": "^3.0.2",
+    "jest": "^26.4.2",
     "ms": "^2.1.2",
     "nodemon": "^2.0.4",
+    "supertest": "^4.0.2",
     "v8-compile-cache": "^2.1.1"
   }
 }
