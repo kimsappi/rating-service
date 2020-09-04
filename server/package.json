@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "start": "node ./bin/www",
+    "dev": "nodemon ./bin/www",
     "lint": "eslint . --fix"
   },
   "dependencies": {
@@ -13,10 +14,14 @@
     "express": "~4.16.1",
     "http-errors": "~1.6.3",
     "jade": "~1.11.0",
-    "morgan": "~1.9.1"
+    "morgan": "~1.9.1",
+    "pg": "^8.3.3",
+    "pg-types": "^3.0.1"
   },
   "devDependencies": {
     "eslint": "^7.8.1",
+    "ms": "^2.1.2",
+    "nodemon": "^2.0.4",
     "v8-compile-cache": "^2.1.1"
   }
 }
