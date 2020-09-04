@@ -6,8 +6,8 @@ const Header = () => {
 
   return (
     <div>Header
-    {user && 'logged in'}
-    {!user && 'not logged in'}
+      {user && 'logged in'}
+      {!user && 'not logged in'}
     </div>
   );
 };

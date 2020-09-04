@@ -11,6 +11,6 @@ const App = () => {
       <Index />
     </>
   );
-}
+};
 
 export default App;
