@@ -1,19 +1,48 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import Autosuggest from 'react-autosuggest';
 
 import { fetchUsers } from '../reducers/allUsers';
 
 const PlayerInput = ({player, setPlayer, label, name, users}) => {
-  console.log(users)
-  const changeValue = event => {
-    setPlayer(event.target.value);
-    console.log(users.filter(user => user.username.includes(player)));
+  const [matchingUsers, setMatchingUsers] = useState([]);
+
+  const changeValue = (_event, { newValue }) => {
+    setPlayer(newValue);
+    console.log(matchingUsers);
+  };
+
+  const onSuggestionsFetchRequested = () => {
+    setMatchingUsers(users.map(user => {
+      if (user.username.includes(player))
+        return user.username;
+    }));
+  };
+
+  const getSuggestionValue = suggestion => {
+    setPlayer(suggestion);
+  };
+
+  const renderSuggestion = suggestion => (
+    <div>{suggestion}</div>
+  );
+
+  const inputProps = {
+    value: player,
+    onChange: changeValue
   };
 
   return (
     <>
       <label htmlFor={name}>{label}</label>
-      <input type='text' value={player} onChange={changeValue} />
+      <Autosuggest
+        suggestions={matchingUsers}
+        inputProps={inputProps}
+        onSuggestionsFetchRequested={onSuggestionsFetchRequested}
+        onSuggestionsClearRequested={setMatchingUsers([])}
+        getSuggestionValue={getSuggestionValue}
+        renderSuggestion={renderSuggestion}
+      />
     </>
   );
 };
