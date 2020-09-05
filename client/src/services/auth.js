@@ -8,5 +8,6 @@ export const createGuestAccount = async () => {
   } catch(err) {
     console.error(err);
     alert('Couldn\'t create guest account! Something is probably wrong with the server.');
+    return null;
   }
 };

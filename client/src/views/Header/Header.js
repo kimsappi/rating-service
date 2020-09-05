@@ -1,10 +1,23 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 
-const LoggedIn = () => (
-  <div>Logged in</div>
-);
+import { logOut } from '../../reducers/user';
+
+const LoggedIn = ({ user }) => {
+  const dispatch = useDispatch();
+
+  const logOutButton = () => {
+    dispatch(logOut());
+  };
+
+  return (
+    <>
+      <div>Logged in as {user.username}</div>
+      <button onClick={logOutButton}>Log out</button>
+    </>
+  );
+};
 
 const NotLoggedIn = () => (
   <div>

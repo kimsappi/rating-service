@@ -8,7 +8,7 @@ const Auth = () => {
   const dispatch = useDispatch();
   const user = useSelector(state => state.user);
 
-  const dispTest = () => {
+  const createGuestAccount = () => {
     dispatch(createGuest());
   }
 
@@ -22,7 +22,7 @@ const Auth = () => {
   
   else
     return (
-      <button onClick={dispTest}>Use guest account</button>
+      <button onClick={createGuestAccount}>Use guest account</button>
     );
 };
 

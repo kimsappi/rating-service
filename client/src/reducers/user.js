@@ -1,26 +1,36 @@
 import { createGuestAccount } from '../services/auth';
+import { setUser, getUser } from '../utils/localStorageActions';
 
-const logIn = data => {
+const logInAction = data => {
+  setUser(data);
   return {
     type: 'LOG_IN',
     data: data
   };
 };
 
+export const logOut = () => {
+  return dispatch => {
+    const data = null;
+    setUser(data);
+    dispatch({
+      type: 'LOG_OUT',
+      data: data
+    });
+  }
+};
+
 export const createGuest = () => {
   return async dispatch => {
     const data = await createGuestAccount();
-    dispatch(logIn(data));
+    dispatch(logInAction(data));
   };
 };
 
-export const createGuestA = async () => {
-  const data = await createGuestAccount();
-  console.log(data)
-    return {
-        type: 'LOG_IN',
-        data: data
-    }
+export const checkUserLoginOnLoad = () => {
+  const data = getUser();
+  return dispatch =>
+    dispatch(logInAction(data));
 };
 
 const userReducer = (state = null, action) => {
@@ -28,10 +38,13 @@ const userReducer = (state = null, action) => {
   console.log(action);
   switch (action.type) {
     case 'LOG_IN':
-      return state;
+      return action.data;
+
+    case 'LOG_OUT':
+      return action.data;
 
     default:
-      return null;
+      return state;
   }
 };
 
