@@ -53,6 +53,31 @@ const PlayerInput = ({player, setPlayer, label, name, users}) => {
   );
 };
 
+const ScoreInput = ({score, setScore, label, name}) => {
+  const changeHandler = event => {
+    if (event.target.checkValidity())
+      setScore(event.target.value);
+  };
+
+  const buttonHandler = (change, event) => {
+    event.preventDefault();
+    if (score + change >= 0 && score + change <= 9999)
+      setScore(score + change);
+  };
+
+  return (
+    <>
+      <label htmlFor={name}>{label} score</label>
+      <button onClick={event => buttonHandler(-1, event)}>-1</button>
+      <input
+        type='text' pattern='[0-9]{1,4}' name={name}
+        value={score} onChange={changeHandler}
+      />
+      <button onClick={event => buttonHandler(1, event)}>+1</button>
+    </>
+  );
+};
+
 const AddResult = () => {
   const dispatch = useDispatch();
 
@@ -77,10 +102,19 @@ const AddResult = () => {
         player={player1} setPlayer={setPlayer1}
         label='Player 1' name='player1' users={users}
       />
+      <ScoreInput
+        score={score1} setScore={setScore1}
+        label='Player 1' name='score1'
+      />
       <PlayerInput
         player={player2} setPlayer={setPlayer2}
         label='Player 2' name='player2' users={users}
       />
+      <ScoreInput
+        score={score2} setScore={setScore2}
+        label='Player 2' name='score2'
+      />
+      <input type='submit' name='submit' value='OK' />
     </form>
   );
 };

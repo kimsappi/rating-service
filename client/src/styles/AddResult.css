@@ -1,3 +1,7 @@
+form > label {
+  display: block;
+}
+
 .react-autosuggest__container {
   position: relative;
 }
