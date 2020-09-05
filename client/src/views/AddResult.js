@@ -4,6 +4,8 @@ import Autosuggest from 'react-autosuggest';
 
 import { fetchUsers } from '../reducers/allUsers';
 
+import '../styles/AddResult.css';
+
 const PlayerInput = ({player, setPlayer, label, name, users}) => {
   const [matchingUsers, setMatchingUsers] = useState([]);
 
@@ -12,20 +14,24 @@ const PlayerInput = ({player, setPlayer, label, name, users}) => {
     console.log(matchingUsers);
   };
 
-  const onSuggestionsFetchRequested = () => {
+  const onSuggestionsFetchRequested = ({ value }) => {
     setMatchingUsers(users.map(user => {
-      if (user.username.includes(player))
+      if (user.username.includes(value))
         return user.username;
     }));
   };
 
   const getSuggestionValue = suggestion => {
-    setPlayer(suggestion);
+    return suggestion;
   };
 
   const renderSuggestion = suggestion => (
     <div>{suggestion}</div>
   );
+
+  const clearSuggestions = () => {
+    setMatchingUsers([]);
+  };
 
   const inputProps = {
     value: player,
@@ -39,7 +45,7 @@ const PlayerInput = ({player, setPlayer, label, name, users}) => {
         suggestions={matchingUsers}
         inputProps={inputProps}
         onSuggestionsFetchRequested={onSuggestionsFetchRequested}
-        onSuggestionsClearRequested={setMatchingUsers([])}
+        onSuggestionsClearRequested={clearSuggestions}
         getSuggestionValue={getSuggestionValue}
         renderSuggestion={renderSuggestion}
       />
@@ -70,6 +76,10 @@ const AddResult = () => {
       <PlayerInput
         player={player1} setPlayer={setPlayer1}
         label='Player 1' name='player1' users={users}
+      />
+      <PlayerInput
+        player={player2} setPlayer={setPlayer2}
+        label='Player 2' name='player2' users={users}
       />
     </form>
   );
