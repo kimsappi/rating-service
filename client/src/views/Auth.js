@@ -1,11 +1,16 @@
 import React from 'react';
 import { Redirect } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 
-import { createGuestAccount } from '../services/auth';
+import { createGuest } from '../reducers/user';
 
 const Auth = () => {
+  const dispatch = useDispatch();
   const user = useSelector(state => state.user);
+
+  const dispTest = () => {
+    dispatch(createGuest());
+  }
 
   if (user)
     return (<Redirect to='/' />);
@@ -17,7 +22,7 @@ const Auth = () => {
   
   else
     return (
-      <button onClick={createGuestAccount}>Use guest account</button>
+      <button onClick={dispTest}>Use guest account</button>
     );
 };
 

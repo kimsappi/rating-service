@@ -1,3 +1,6 @@
+CREATE TYPE theme AS ENUM ('light', 'dark');
+CREATE TYPE color AS ENUM ('default', 'red-green');
+
 DROP TABLE IF EXISTS users;
 CREATE TABLE IF NOT EXISTS users(
   id INT NOT NULL PRIMARY KEY,
@@ -6,7 +9,9 @@ CREATE TABLE IF NOT EXISTS users(
   lastName TEXT DEFAULT NULL,
   imageUrl TEXT DEFAULT NULL,
   rating INT DEFAULT 2000,
-  active BOOLEAN DEFAULT FALSE
+  active BOOLEAN DEFAULT FALSE,
+  theme theme DEFAULT 'light',
+  color color DEFAULT 'default'
 );
 
 DROP TABLE IF EXISTS matches;
@@ -20,4 +25,10 @@ CREATE TABLE IF NOT EXISTS matches(
   "time" TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   FOREIGN KEY (winner) REFERENCES users(id),
   FOREIGN KEY (loser) REFERENCES users(id)
+);
+
+DROP TABLE IF EXISTS bans;
+CREATE TABLE IF NOT EXISTS bans(
+  id INT PRIMARY KEY,
+  FOREIGN KEY (id) REFERENCES users(id)
 );

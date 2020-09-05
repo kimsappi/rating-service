@@ -1,14 +1,12 @@
 import axios from 'axios';
 import * as config from '../config.json';
 
-import { logIn } from '../reducers/user';
-
 export const createGuestAccount = async () => {
   try {
     const result = await axios.post(config.baseUrl + '/auth/createGuest');
-    logIn(result.data);
+    return result.data;
   } catch(err) {
-    console.log(err);
+    console.error(err);
     alert('Couldn\'t create guest account! Something is probably wrong with the server.');
   }
 };
