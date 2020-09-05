@@ -14,7 +14,7 @@ const App = () => {
   // Checking if user is already logged in
   useEffect(() => {
     dispatch(checkUserLoginOnLoad());
-  }, [])
+  }, [dispatch])
 
   return (
     <>

@@ -8,9 +8,11 @@ import thunk from 'redux-thunk';
 import './index.css';
 import App from './App';
 import userReducer from './reducers/user';
+import allUsersReducer from './reducers/allUsers';
 
 const reducer = combineReducers({
   user: userReducer,
+  allUsers: allUsersReducer
 });
 
 const store = createStore(

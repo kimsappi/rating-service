@@ -4,8 +4,13 @@ const { getAllActiveOrderedByRating } = require('../services/users');
 
 /* GET users */
 router.get('/', async (req, res, next) => {
-  const results = await getAllActiveOrderedByRating();
-  res.json(results);
+  try {
+    const results = await getAllActiveOrderedByRating();
+    return res.json(results);
+  } catch(err) {
+    console.error(err);
+    return res.json(null);
+  }
 });
 
 module.exports = router;
