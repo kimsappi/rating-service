@@ -15,6 +15,7 @@ const LoggedIn = ({ user }) => {
     <>
       <div>Logged in as {user.username}</div>
       <button onClick={logOutButton}>Log out</button>
+      <Link to='/new'>Submit new result</Link>
     </>
   );
 };

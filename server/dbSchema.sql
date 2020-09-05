@@ -22,9 +22,11 @@ CREATE TABLE IF NOT EXISTS matches(
   winnerScore INT NOT NULL,
   loserScore INT NOT NULL,
   ratingChange INT NOT NULL,
+  submitter INT NOT NULL,
   "time" TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   FOREIGN KEY (winner) REFERENCES users(id),
-  FOREIGN KEY (loser) REFERENCES users(id)
+  FOREIGN KEY (loser) REFERENCES users(id),
+  FOREIGN KEY (submitter) REFERENCES users(id)
 );
 
 DROP TABLE IF EXISTS bans;

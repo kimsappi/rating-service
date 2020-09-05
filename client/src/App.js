@@ -5,6 +5,7 @@ import './App.css';
 import Header from './views/Header/Header';
 import Index from './views/Index/Index';
 import Auth from './views/Auth';
+import AddResult from './views/AddResult';
 
 import { checkUserLoginOnLoad } from './reducers/user';
 import { useDispatch } from 'react-redux';
@@ -21,6 +22,7 @@ const App = () => {
       <Header />
       <Switch>
         <Route path='/auth' component={Auth} />
+        <Route path='/new' component={AddResult} />
         <Route path='/' component={Index} />
       </Switch>
     </>
