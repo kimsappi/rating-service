@@ -24,7 +24,7 @@ const getInputPlayerIdsAndRatings = async (match) => {
 
   const {rows} = await pool.query(query);
   if (rows.length !== 2)
-    throw `ERR_KSAPPI_INVALID_USERNAMES
+    throw `ERR_KSAPPI_INVALID_INPUT
 Invalid usernames submitted: ('${match.player1}' and '${match.player2}')`;
 
   const player1 = rows.find(item => matchUserNameToId(item, match.player1));
@@ -57,7 +57,18 @@ const structureMatchInput = async (match, submitter) => {
   };
 };
 
+// Check that submitted usernames are unique, scores are positive integers, etc.
+const checkMatchDataSurfaceValidity = match => {
+  if (match.player1 === match.player2)
+    throw 'ERR_KSAPPI_INVALID_INPUT Usernames are identical';
+  if (!Number.isInteger(match.score1) || !Number.isInteger(match.score2))
+    throw `ERR_KSAPPI_INVALID_INPUT
+Invalid score ${match.score1} (${typeof match.score1}) or \
+${match.score2} (${typeof match.score2})`;
+};
+
 const addNewMatch = async (matchData, submitter) => {
+  checkMatchDataSurfaceValidity(matchData);
   const d = await structureMatchInput(matchData, submitter);
   const query = {
     text: `

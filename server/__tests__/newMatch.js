@@ -70,6 +70,33 @@ describe('New match submissions', () => {
       .expect('Content-Type', /application\/json/);
   });
 
+  test('Incorrect score (number as string)', async () => {
+    const response = await api
+      .post('/api/matches/new')
+      .set('Authorization', `bearer ${token}`)
+      .send({
+        score1: highScore,
+        score2: highScore.toString(),
+        player1: player1,
+        player2: player2
+      })
+      .expect(400)
+      .expect('Content-Type', /application\/json/);
+  });
+
+  test('Missing score', async () => {
+    const response = await api
+      .post('/api/matches/new')
+      .set('Authorization', `bearer ${token}`)
+      .send({
+        score1: highScore,
+        player1: player1,
+        player2: player2
+      })
+      .expect(400)
+      .expect('Content-Type', /application\/json/);
+  });
+
   beforeAll(done => {
     const initialiseAccounts = async () => {
       const guest1 = await createGuestAccount();
