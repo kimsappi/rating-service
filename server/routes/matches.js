@@ -6,10 +6,10 @@ var router = express.Router();
 router.post('/new', async (req, res, next) => {
   try {
     const results = await addNewMatch(req.body, req.user);
-    return res.json(results);
+    return res.status(201).json(results);
   } catch(err) {
     console.error(err);
-    return res.json(null);
+    return res.status(400).json(null);
   }
 });
 

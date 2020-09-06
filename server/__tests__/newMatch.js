@@ -5,9 +5,13 @@ const api = supertest(app);
 const { createGuestAccount } = require('../services/auth');
 const { generateJWT } = require('../modules/auth');
 
+let submitterId = 0;
 let token = '';
 let player1 = '';
 let player2 = '';
+
+const highScore = 15;
+const lowScore = 5;
 
 describe('New match submissions', () => {
   test('New match is submitted correctly', async () => {
@@ -15,8 +19,8 @@ describe('New match submissions', () => {
       .post('/api/matches/new')
       .set('Authorization', `bearer ${token}`)
       .send({
-        score1: 5,
-        score2: 5,
+        score1: highScore,
+        score2: lowScore,
         player1: player1,
         player2: player2
       })
@@ -24,9 +28,46 @@ describe('New match submissions', () => {
       .expect('Content-Type', /application\/json/);
 
     const res = response.body;
-    expect(res.token).toBeDefined();
-    expect(res.token).not.toBe(null);
+    expect(res.draw).toBe(false);
+    expect(res.winner_score).toBe(highScore);
+    expect(res.loser_score).toBe(lowScore);
     expect(res.id).toBeDefined();
+    expect(res.submitter).toBe(submitterId);
+  });
+
+  test('Draw is correctly flagged', async () => {
+    const response = await api
+      .post('/api/matches/new')
+      .set('Authorization', `bearer ${token}`)
+      .send({
+        score1: highScore,
+        score2: highScore,
+        player1: player1,
+        player2: player2
+      })
+      .expect(201)
+      .expect('Content-Type', /application\/json/);
+
+    const res = response.body;
+    expect(res.draw).toBe(true);
+    expect(res.winner_score).toBe(highScore);
+    expect(res.loser_score).toBe(highScore);
+    expect(res.id).toBeDefined();
+    expect(res.submitter).toBe(submitterId);
+  });
+
+  test('Incorrect username ', async () => {
+    const response = await api
+      .post('/api/matches/new')
+      .set('Authorization', `bearer ${token}`)
+      .send({
+        score1: highScore,
+        score2: highScore,
+        player1: 'THIS PLAYER SHOULD NOT BE FOUND',
+        player2: player2
+      })
+      .expect(400)
+      .expect('Content-Type', /application\/json/);
   });
 
   beforeAll(done => {
@@ -37,6 +78,7 @@ describe('New match submissions', () => {
       player1 = guest1.username;
       player2 = guest2.username;
       token = generateJWT(guest1);
+      submitterId = guest1.id;
 
       done();
     };
