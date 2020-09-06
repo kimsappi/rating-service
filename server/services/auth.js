@@ -11,7 +11,7 @@ INSERT INTO users(id, username, firstName, lastName)
   VALUES (${rnd}, '${username}', 'Guest', '${lastName}')
   RETURNING *;`;
   const {rows} = await pool.query(query);
-  return rows;
+  return rows[0];
 };
 
 module.exports = {

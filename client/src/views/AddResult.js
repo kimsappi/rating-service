@@ -5,6 +5,7 @@ import Autosuggest from 'react-autosuggest';
 import { fetchUsers } from '../reducers/allUsers';
 
 import '../styles/AddResult.css';
+import { sendScore } from '../services/scores';
 
 const PlayerInput = ({player, setPlayer, label, name, users}) => {
   const [matchingUsers, setMatchingUsers] = useState([]);
@@ -37,7 +38,8 @@ const PlayerInput = ({player, setPlayer, label, name, users}) => {
   const inputProps = {
     value: player,
     onChange: changeValue,
-    pattern: '.{1,20}'
+    pattern: '.{1,20}',
+    required: true
   };
 
   return (
@@ -79,7 +81,7 @@ const ScoreInput = ({score, setScore, label, name}) => {
       <button onClick={event => buttonHandler(-1, event)}>-1</button>
       <input
         type='text' pattern='[0-9]{1,4}' name={name}
-        value={score} onChange={changeHandler}
+        value={score} onChange={changeHandler} required={true}
       />
       <button onClick={event => buttonHandler(1, event)}>+1</button>
     </>
@@ -104,9 +106,13 @@ const AddResult = () => {
     }
   }, [user, dispatch]);
 
-  const submitScore = event => {
+  const submitScore = async event => {
     event.preventDefault();
-    
+    if (player1 !== player2) {
+      const response = await sendScore(player1, player2, score1, score2, user);
+    }
+    else
+      alert('You can\'t play against yourself!');
   };
 
   return (
