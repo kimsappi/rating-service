@@ -11,23 +11,24 @@ const PlayerInput = ({player, setPlayer, label, name, users}) => {
 
   const changeValue = (_event, { newValue }) => {
     setPlayer(newValue);
-    console.log(matchingUsers);
   };
 
   const onSuggestionsFetchRequested = ({ value }) => {
-    setMatchingUsers(users.map(user => {
+    setMatchingUsers(users.filter(user => {
       if (user.username.includes(value))
         return user.username;
     }));
+    return matchingUsers;
   };
 
   const getSuggestionValue = suggestion => {
     return suggestion;
   };
 
-  const renderSuggestion = suggestion => (
-    <div>{suggestion}</div>
-  );
+  const renderSuggestion = suggestion => {
+    return (
+      <div>{suggestion.username}</div>
+    )};
 
   const clearSuggestions = () => {
     setMatchingUsers([]);
@@ -35,7 +36,8 @@ const PlayerInput = ({player, setPlayer, label, name, users}) => {
 
   const inputProps = {
     value: player,
-    onChange: changeValue
+    onChange: changeValue,
+    pattern: '.{1,20}'
   };
 
   return (
@@ -55,14 +57,20 @@ const PlayerInput = ({player, setPlayer, label, name, users}) => {
 
 const ScoreInput = ({score, setScore, label, name}) => {
   const changeHandler = event => {
-    if (event.target.checkValidity())
-      setScore(event.target.value);
+    try {
+      const scoreInt = parseInt(event.target.value);
+      if (event.target.checkValidity())
+        setScore(scoreInt || 0);
+    } catch(err) {}
   };
 
   const buttonHandler = (change, event) => {
     event.preventDefault();
-    if (score + change >= 0 && score + change <= 9999)
-      setScore(score + change);
+    try {
+      const scoreInt = parseInt(score);
+      if (scoreInt + change >= 0 && scoreInt + change <= 9999)
+        setScore(scoreInt + change);
+    } catch(err) {}
   };
 
   return (
@@ -96,8 +104,13 @@ const AddResult = () => {
     }
   }, [user, dispatch]);
 
+  const submitScore = event => {
+    event.preventDefault();
+    
+  };
+
   return (
-    <form>
+    <form onSubmit={submitScore}>
       <PlayerInput
         player={player1} setPlayer={setPlayer1}
         label='Player 1' name='player1' users={users}
