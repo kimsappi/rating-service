@@ -1,9 +1,9 @@
 const supertest = require('supertest');
-const app = require('../app');
+const app = require('../src/app');
 
 const api = supertest(app);
-const { createGuestAccount } = require('../services/auth');
-const { generateJWT } = require('../modules/auth');
+const { createGuestAccount } = require('../src/services/auth');
+const { generateJWT } = require('../src/modules/auth');
 
 let submitterId = 0;
 let token = '';
