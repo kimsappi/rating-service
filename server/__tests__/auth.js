@@ -24,7 +24,7 @@ describe('Token refreshing', () => {
   test('Token is refreshed', async done => {
     setTimeout(async () => {
       const response = await api
-        .get('/api/users/refreshToken')
+        .get('/api/refreshToken')
         .set('Authorization', `bearer ${token}`)
         .expect(200);
 
@@ -37,7 +37,7 @@ describe('Token refreshing', () => {
       // because it contains different data.)
       setTimeout(async () => {
         const res2 = await api
-          .get('/api/users/refreshToken')
+          .get('/api/refreshToken')
           .set('Authorization', `bearer ${returnedToken}`)
           .expect(200);
 
@@ -49,7 +49,7 @@ describe('Token refreshing', () => {
 
   test('Refreshing without a valid token fails', async () => {
     const response = await api
-      .get('/api/users/refreshToken')
+      .get('/api/refreshToken')
       .set('Authorization', `bearer none`)
       .expect(401);
 

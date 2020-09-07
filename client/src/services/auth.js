@@ -17,7 +17,7 @@ export const createGuestAccount = async () => {
 export const refreshTokenAndData = async token => {
   try {
     const result = await axios.get(
-      config.baseUrl + '/users/refreshToken',
+      config.baseUrl + '/refreshToken',
       {headers: getAuthHeader(token)}
     );
     return result.data;
