@@ -19,6 +19,7 @@ describe('Fetching a single user\'s data', () => {
 
     const res = response.body;
     expect(res.user.id).toBe(tokenHolder.id);
+    expect(res.user.match_count).toBe(0);
     expect(res.matches).toHaveLength(0);
   });
 
@@ -30,6 +31,7 @@ describe('Fetching a single user\'s data', () => {
 
     const res = response.body;
     expect(res.user.id).toBe(otherUser.id);
+    expect(res.user.match_count).toBe(0);
     expect(res.matches).toHaveLength(0);
   });
 
@@ -41,7 +43,22 @@ describe('Fetching a single user\'s data', () => {
 
     const res = response.body;
     expect(res.user.id).toBe(otherUser.id);
+    expect(res.user.match_count).toBe(0);
     expect(res.matches).toHaveLength(0);
+  });
+
+  test('Fetching a non-existent account by id', async () => {
+    const response = await api
+      .get('/api/users/0')
+      .set('Authorization', `bearer ${token}`)
+      .expect(400);
+  });
+
+  test('Fetching a non-existent account by id', async () => {
+    const response = await api
+      .get('/api/users/ACCOUNTSHOULDNOTEXIST')
+      .set('Authorization', `bearer ${token}`)
+      .expect(400);
   });
 
   beforeAll(done => {

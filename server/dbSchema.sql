@@ -48,6 +48,4 @@ CREATE VIEW matches_with_users AS
     winner_score, loser_score, draw, "time", rating_change, m.id AS id
   FROM matches AS m
     JOIN users AS w ON (w.id = m.winner)
-    JOIN users AS l ON (l.id = m.loser)
-  ORDER BY "time" DESC
-  LIMIT 30;
+    JOIN users AS l ON (l.id = m.loser);
