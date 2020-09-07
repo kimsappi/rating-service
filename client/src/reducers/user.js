@@ -1,4 +1,4 @@
-import { createGuestAccount } from '../services/auth';
+import { createGuestAccount, refreshTokenAndData } from '../services/auth';
 import { setUser, getUser } from '../utils/localStorageActions';
 
 const logInAction = data => {
@@ -28,9 +28,15 @@ export const createGuest = () => {
 };
 
 export const checkUserLoginOnLoad = () => {
-  const data = getUser();
-  return dispatch =>
-    dispatch(logInAction(data));
+  return async dispatch => {
+    const data = getUser();
+    try {
+      const newData = await refreshTokenAndData(data.token);
+      dispatch(logInAction(newData));
+    } catch(err) {
+      dispatch(logOut());
+    }
+  }
 };
 
 const userReducer = (state = null, action) => {

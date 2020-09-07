@@ -14,6 +14,17 @@ INSERT INTO users(id, username, firstName, lastName)
   return rows[0];
 };
 
+const getIndividualUserData = async id => {
+  const query = {
+    text: 'SELECT * FROM users WHERE id=$1;',
+    values: [id],
+    name: `Query user ${id}`
+  };
+  const {rows} = await pool.query(query);
+  return rows[0];
+};
+
 module.exports = {
   createGuestAccount,
+  getIndividualUserData
 };

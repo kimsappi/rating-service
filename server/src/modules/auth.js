@@ -18,7 +18,8 @@ const authenticationMiddleware = (req, res, next) => {
 	}
 }
 
-const generateJWT = data => jwt.sign(data, config.TOKEN_SECRET);
+const generateJWT = data => 
+	jwt.sign(data, config.TOKEN_SECRET, {expiresIn: config.tokenExpiry});
 
 module.exports = {
 	authenticationMiddleware,

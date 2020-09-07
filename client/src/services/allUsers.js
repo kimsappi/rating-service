@@ -6,7 +6,7 @@ export const fetchAllUsers = async token => {
   try {
     const result = await axios.get(
       config.baseUrl + '/users',
-      {headers: getAuthHeader(token)}  
+      {headers: getAuthHeader(token)}
     );
     return result.data;
   } catch(err) {
