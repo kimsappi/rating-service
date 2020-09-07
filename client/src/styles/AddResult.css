@@ -2,23 +2,26 @@ form > label {
   display: block;
 }
 
+form input[type=text] {
+  font-family: Helvetica, sans-serif;
+  font-weight: 300;
+  border: 1px solid #aaa;
+  border-radius: 4px;
+}
+
+form input[type=text]:focus {
+  outline: none;
+}
+
 .react-autosuggest__container {
   position: relative;
 }
 
 .react-autosuggest__input {
-  width: 240px;
-  height: 30px;
-  padding: 10px 20px;
-  font-family: Helvetica, sans-serif;
-  font-weight: 300;
+  padding: 10px 10px;
   font-size: 16px;
-  border: 1px solid #aaa;
-  border-radius: 4px;
-}
-
-.react-autosuggest__input--focused {
-  outline: none;
+  height: 30px;
+  width: 240px;
 }
 
 .react-autosuggest__input--open {
@@ -34,7 +37,7 @@ form > label {
   display: block;
   position: absolute;
   top: 51px;
-  width: 280px;
+  width: 240px;
   border: 1px solid #aaa;
   background-color: #fff;
   font-family: Helvetica, sans-serif;
@@ -55,9 +58,45 @@ form > label {
 
 .react-autosuggest__suggestion {
   cursor: pointer;
-  padding: 10px 20px;
+  padding: 10px 10px;
 }
 
 .react-autosuggest__suggestion--highlighted {
   background-color: #ddd;
+}
+
+.scoreInput {
+  width: 60px;
+  height: 40px;
+  text-align: right;
+  font-size: 1.2em;
+}
+
+.scoreButton {
+  margin: 0px 5px;
+  border-radius: 30%;
+  height: 40px;
+  width: 40px;
+  font-size: 1.2em;
+  border: 2px solid #888;
+}
+
+.increase {
+  background-color: lightblue;
+  border-color: #aaf;
+}
+
+.decrease {
+  background-color: lightsalmon;
+  border-color: #c55
+}
+
+input[type=submit] {
+  display: block;
+  margin-top: 1em;
+  background-color: #55f;
+  border-radius: 30%;
+  padding: 5px 10px;
+  font-size: 1.5em;
+  color: whitesmoke;
 }

@@ -75,18 +75,33 @@ const ScoreInput = ({score, setScore, label, name}) => {
       const scoreInt = parseInt(score);
       if (scoreInt + change >= 0 && scoreInt + change <= 9999)
         setScore(scoreInt + change);
+      else if (scoreInt + change < 0)
+        setScore(0);
+      else if (scoreInt + change > 9999)
+        setScore(9999);
     } catch(err) {}
   };
 
   return (
     <>
       <label htmlFor={name}>{label} score</label>
-      <button onClick={event => buttonHandler(-1, event)}>-1</button>
+      <button onClick={event => buttonHandler(-5, event)}
+        class='scoreButton decrease'
+      >-5</button>
+      <button onClick={event => buttonHandler(-1, event)}
+        class='scoreButton decrease'
+      >-1</button>
       <input
         type='text' pattern='[0-9]{1,4}' name={name}
         value={score} onChange={changeHandler} required={true}
+        class='scoreInput'
       />
-      <button onClick={event => buttonHandler(1, event)}>+1</button>
+      <button onClick={event => buttonHandler(1, event)}
+        class='scoreButton increase'
+      >+1</button>
+      <button onClick={event => buttonHandler(5, event)}
+        class='scoreButton increase'
+      >+5</button>
     </>
   );
 };
