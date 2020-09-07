@@ -1,8 +1,10 @@
-import React, { useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { Link, useHistory } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
+import { Alert } from 'react-bootstrap';
 
 import { fetchUsers } from '../../reducers/allUsers';
+import parseSearchString from '../../utils/parseSearchString';
 
 const NotLoggedIn = () => (
   <div>You must <Link to='/auth'>log in</Link> to access the service!</div>
@@ -20,7 +22,7 @@ const LoggedIn = ({user}) => {
 
   useEffect(() => {
     dispatch(fetchUsers(user.token));
-  }, [dispatch]);
+  }, [dispatch, user.token]);
 
   if (allUsers === null)
     return (<div>Something is wrong with the server, check back later!</div>);
@@ -30,11 +32,40 @@ const LoggedIn = ({user}) => {
     return allUsers.map((current, index) => RankingCard(current, index + 1, user));
 }
 
+const Notifications = ({searchArr}) => {
+  let ret = [];
+
+  if (!searchArr)
+    return '';
+
+  if (searchArr.submissionSuccess)
+    ret.push({
+      text: 'Result submitted!',
+      variant: 'success'
+    });
+
+  return ret.map((item, index) =>
+    <Alert key={index} variant={item.variant}>{item.text}</Alert>
+  );
+};
+
 const Index = () => {
+  const history = useHistory();
   const user = useSelector(state => state.user);
+  const [searchArr, setSearchArr] = useState(
+    parseSearchString(window.location.search)
+  );
+
+  useEffect(() => {
+    // This will make sure notifications aren't shown again if page is refreshed
+    history.push('/');
+    // Clear notifications after 5 seconds
+    setTimeout(() => setSearchArr(null), 5000);
+  }, [history]);
 
   return (
     <div>
+      <Notifications searchArr={searchArr} />
       {user ? <LoggedIn user={user} /> : <NotLoggedIn />}
     </div>
   );

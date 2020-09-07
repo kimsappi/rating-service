@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import Autosuggest from 'react-autosuggest';
+import { useHistory } from 'react-router-dom';
 
 import { fetchUsers } from '../reducers/allUsers';
 
@@ -18,12 +19,14 @@ const PlayerInput = ({player, setPlayer, label, name, users}) => {
     setMatchingUsers(users.filter(user => {
       if (user.username.includes(value))
         return user.username;
+      else
+        return false;
     }));
     return matchingUsers;
   };
 
   const getSuggestionValue = suggestion => {
-    return suggestion;
+    return suggestion.username;
   };
 
   const renderSuggestion = suggestion => {
@@ -90,6 +93,7 @@ const ScoreInput = ({score, setScore, label, name}) => {
 
 const AddResult = () => {
   const dispatch = useDispatch();
+  const history = useHistory();
 
   const user = useSelector(state => state.user);
   const users = useSelector(state => state.allUsers);
@@ -108,11 +112,16 @@ const AddResult = () => {
 
   const submitScore = async event => {
     event.preventDefault();
-    if (player1 !== player2) {
-      const response = await sendScore(player1, player2, score1, score2, user);
+    if (player1 !== player2 && score1 + score2 > 0) {
+      if (window.confirm(`Submit result:
+${player1} ${score1} - ${score2} ${player2}?`)) {
+        const response = await sendScore(player1, player2, score1, score2, user);
+        if (response)
+          history.push('/?submissionSuccess=1');
+      }
     }
     else
-      alert('You can\'t play against yourself!');
+      alert('You can\'t play against yourself and there must be a score!');
   };
 
   return (
