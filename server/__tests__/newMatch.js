@@ -56,6 +56,34 @@ describe('New match submissions', () => {
     expect(res.submitter).toBe(submitterId);
   });
 
+  test('Score 0-0 not allowed', async () => {
+    const response = await api
+      .post('/api/matches/new')
+      .set('Authorization', `bearer ${token}`)
+      .send({
+        score1: 0,
+        score2: 0,
+        player1: player1,
+        player2: player2
+      })
+      .expect(400)
+      .expect('Content-Type', /application\/json/);
+  });
+
+  test('Player is not allowed to play against himself', async () => {
+    const response = await api
+      .post('/api/matches/new')
+      .set('Authorization', `bearer ${token}`)
+      .send({
+        score1: highScore,
+        score2: highScore,
+        player1: player1,
+        player2: player1
+      })
+      .expect(400)
+      .expect('Content-Type', /application\/json/);
+  });
+
   test('Incorrect username ', async () => {
     const response = await api
       .post('/api/matches/new')
