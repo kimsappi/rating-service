@@ -86,21 +86,21 @@ const ScoreInput = ({score, setScore, label, name}) => {
     <>
       <label htmlFor={name}>{label} score</label>
       <button onClick={event => buttonHandler(-5, event)}
-        class='scoreButton decrease'
+        className='scoreButton decrease'
       >-5</button>
       <button onClick={event => buttonHandler(-1, event)}
-        class='scoreButton decrease'
+        className='scoreButton decrease'
       >-1</button>
       <input
         type='text' pattern='[0-9]{1,4}' name={name}
         value={score} onChange={changeHandler} required={true}
-        class='scoreInput'
+        className='scoreInput'
       />
       <button onClick={event => buttonHandler(1, event)}
-        class='scoreButton increase'
+        className='scoreButton increase'
       >+1</button>
       <button onClick={event => buttonHandler(5, event)}
-        class='scoreButton increase'
+        className='scoreButton increase'
       >+5</button>
     </>
   );
