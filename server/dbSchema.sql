@@ -49,3 +49,20 @@ CREATE VIEW matches_with_users AS
   FROM matches AS m
     JOIN users AS w ON (w.id = m.winner)
     JOIN users AS l ON (l.id = m.loser);
+
+CREATE OR REPLACE FUNCTION update_ratings_post_match()
+  RETURNS TRIGGER
+  LANGUAGE plpgsql
+  AS
+$$
+BEGIN
+  UPDATE users SET rating = rating + NEW.rating_change WHERE id = NEW.winner;
+  UPDATE users SET rating = rating - NEW.rating_change WHERE id = NEW.loser;
+  RETURN NEW;
+END;
+$$;
+
+CREATE TRIGGER update_ratings_post_match AFTER INSERT
+  ON matches
+  FOR EACH ROW
+  EXECUTE PROCEDURE update_ratings_post_match();

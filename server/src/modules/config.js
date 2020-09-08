@@ -1,4 +1,6 @@
-const config = require('../../.env.json');
+const env = process.env.NODE_ENV;
+
+const config = require(`../../.env.${env}.json`);
 
 const constants = {
   maxConnections: 10,

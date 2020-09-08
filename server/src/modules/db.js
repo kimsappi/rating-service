@@ -8,7 +8,8 @@ const pool = new Pool({
   database: config.DB_DATABASE,
   max: config.max,
   idleTimeoutMillis: config.idleTimeoutMillis,
-  connectionTimeoutMillis: config.connectionTimeoutMillis
+  connectionTimeoutMillis: config.connectionTimeoutMillis,
+  ssl: {rejectUnauthorized: false}
 });
 
 module.exports = pool;
