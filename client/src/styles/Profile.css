@@ -1,0 +1,17 @@
+.singleMatchResult {
+  padding: 7px;
+  margin-bottom: 4px;
+  border-radius: 1em;
+}
+
+.matchLoss {
+  background-color: #fcc;
+}
+
+.matchWin {
+  background-color: #ccf;
+}
+
+.matchDraw {
+  background-color: #eea;
+}

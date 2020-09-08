@@ -3,6 +3,8 @@ import { useParams, Link } from 'react-router-dom';
 import getProfileData from '../services/profile';
 import { useSelector } from 'react-redux';
 
+import '../styles/Profile.css';
+
 const GeneralProfileData = ({data}) => (
   <div>
     <div>{data.username}</div>
@@ -11,17 +13,19 @@ const GeneralProfileData = ({data}) => (
 );
 
 const SingleMatch = ({match, index, username}) => {
-  const playerFirst = match.winner_username === username ? true : false;
-  const playerScore = !playerFirst ? match.loser_score : match.winner_score;
-  const otherUsername = playerFirst ?
+  const playerWon = match.winner_username === username ? true : false;
+  const playerScore = !playerWon ? match.loser_score : match.winner_score;
+  const otherUsername = playerWon ?
     match.loser_username : match.winner_username;
-  const otherId = playerFirst ? match.loser_id : match.winner_id;
-  const otherScore = playerFirst ? match.loser_score : match.winner_score;
+  const otherId = playerWon ? match.loser_id : match.winner_id;
+  const otherScore = playerWon ? match.loser_score : match.winner_score;
 
+  const resultClass = match.draw ? 'matchDraw' :
+    playerWon ? 'matchWin' : 'matchLoss';
 
   return (
-    <div>
-      {username} {playerScore} - {otherScore} <Link to={'/users/' + otherId}>{otherUsername}</Link>
+    <div className={`singleMatchResult ${resultClass}`} key={index}>
+      {username} {playerScore} - {otherScore} <Link to={`/users/${otherId}`}>{otherUsername}</Link>
     </div>
   );
 };

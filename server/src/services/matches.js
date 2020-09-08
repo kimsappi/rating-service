@@ -44,7 +44,7 @@ const structureMatchInput = async (match, submitter) => {
   // Winner is usually listed as the player with the higher score,
   // but in the case of a draw the winner is the player with the lower rating
   const sortedPlayers = [...players].sort((a, b) => {
-    draw ? a.rating - b.rating : b.score - a.score;
+    return draw ? a.rating - b.rating : b.score - a.score;
   });
   return {
     winner: sortedPlayers[0].id,
