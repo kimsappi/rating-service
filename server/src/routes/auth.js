@@ -22,7 +22,7 @@ if (process.env.NODE_ENV === 'production' || process.env.NODE_ENV === 'developme
   router.post('/apiLogin', async (req, res, next) => {
     try {
       const token = await tokenService.getToken(req.body.code);
-      const result = await authService.apiLogin(token);
+      const result = await authService.apiLogin(token.access_token);
       const jwToken = generateJWT(result);
       return res.status(201).json({...result, token: jwToken});
     } catch(err) {

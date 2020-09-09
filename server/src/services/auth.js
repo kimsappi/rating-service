@@ -2,18 +2,28 @@ const pool = require('../modules/db.js');
 
 const { getUserFromApi } = require('./token');
 
+const createAccount = async (id, username, firstName, lastName, imgUrl) => {
+  const query = {
+    text: `INSERT INTO users(id, username, firstName, lastName, imageurl)
+      VALUES ($1, $2, $3, $4, $5)
+      RETURNING *;`,
+    values: [id, username, firstName, lastName, imgUrl]
+  };
+    
+  const {rows} = await pool.query(query);
+  return rows[0];
+};
+
 // Create guest account for the dev environment
 const createGuestAccount = async () => {
   const rnd = Math.floor(Math.random() * Math.floor(99999));
   const username = `guest${rnd}`;
   const lastName = rnd.toString();
 
-  const query = `
-INSERT INTO users(id, username, firstName, lastName)
-  VALUES (${rnd}, '${username}', 'Guest', '${lastName}')
-  RETURNING *;`;
-  const {rows} = await pool.query(query);
-  return rows[0];
+  const guestAccount = await createAccount(
+    rnd, username, 'Guest', lastName, null
+  );
+  return guestAccount;
 };
 
 const getIndividualUserData = async id => {
@@ -27,10 +37,18 @@ const getIndividualUserData = async id => {
 };
 
 const apiLogin = async token => {
-  const userData = await getUserFromApi(token);
   try {
-    const user = getIndividualUserData(userData.id);
-    return user;
+    const userData = await getUserFromApi(token);
+    const user = await getIndividualUserData(userData.id);
+    if (user)
+      return user;
+    else {
+      const createdUser = await createAccount(
+        userData.id, userData.login, userData.first_name,
+        userData.last_name, userData.image_url
+      );
+      return createdUser;
+    }
   } catch(err) {
     console.error(err);
     return null;

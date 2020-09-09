@@ -18,7 +18,7 @@ const getToken = async code => {
 
 const getUserFromApi = async token => {
   const res = await axios.get(config.authApiUrl + '/v2/me', {
-    headers: `Authorization: Bearer ${token}`
+    headers: {Authorization: `Bearer ${token}`}
   });
   return res.data;
 }
