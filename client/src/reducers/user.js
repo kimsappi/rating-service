@@ -30,9 +30,10 @@ export const createGuest = () => {
   };
 };
 
-export const loginThroughApi = () => {
+export const loginThroughApi = code => {
   return async dispatch => {
-    const data = await apiLogin()
+    const data = await apiLogin(code);
+    dispatch(logInAction(data));
   };
 };
 

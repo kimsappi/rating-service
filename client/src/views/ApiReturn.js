@@ -3,6 +3,7 @@ import parseSearchString from '../utils/parseSearchString';
 import { Redirect } from 'react-router-dom';
 import { getAuthState } from '../utils/localStorageActions';
 import { useDispatch } from 'react-redux';
+import { loginThroughApi } from '../reducers/user';
 
 const ApiReturn = () => {
   const dispatch = useDispatch();
@@ -10,8 +11,9 @@ const ApiReturn = () => {
   const data = parseSearchString(window.location.search);
   
   useEffect(() => {
+    console.log(data);
     if (data)
-      dispatch()
+      dispatch(loginThroughApi(data.code));
   }, [data, dispatch]);
 
   if (!data || !data.code || !data.state || data.state !== getAuthState())

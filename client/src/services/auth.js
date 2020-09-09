@@ -27,9 +27,11 @@ export const refreshTokenAndData = async token => {
   }
 };
 
-export const apiLogin = async () => {
+export const apiLogin = async code => {
   try {
-    const result = await axios.post(config.baseUrl + '/auth/apiLogin');
+    const result = await axios.post(config.baseUrl + '/auth/apiLogin', {
+      code: code
+    });
     return result.data;
   } catch(err) {
     console.error(err);
