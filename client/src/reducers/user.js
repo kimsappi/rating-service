@@ -1,4 +1,7 @@
-import { createGuestAccount, refreshTokenAndData } from '../services/auth';
+import {
+  createGuestAccount,
+  refreshTokenAndData,
+  apiLogin } from '../services/auth';
 import { setUser, getUser } from '../utils/localStorageActions';
 
 const logInAction = data => {
@@ -24,6 +27,12 @@ export const createGuest = () => {
   return async dispatch => {
     const data = await createGuestAccount();
     dispatch(logInAction(data));
+  };
+};
+
+export const loginThroughApi = () => {
+  return async dispatch => {
+    const data = await apiLogin()
   };
 };
 

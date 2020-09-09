@@ -7,6 +7,7 @@ import Index from './views/Index/Index';
 import Auth from './views/Auth';
 import AddResult from './views/AddResult';
 import Profile from './views/Profile';
+import ApiReturn from './views/ApiReturn';
 
 import { checkUserLoginOnLoad } from './reducers/user';
 import { useDispatch } from 'react-redux';
@@ -23,6 +24,7 @@ const App = () => {
       <Header />
       <Switch>
         <Route path='/auth' component={Auth} />
+        <Route path='/apiReturn' component={ApiReturn} />
         <Route path='/new' component={AddResult} />
         <Route path='/users/:id' component={Profile} />
         <Route path='/' component={Index} />

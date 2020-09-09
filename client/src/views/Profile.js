@@ -12,7 +12,7 @@ const GeneralProfileData = ({data}) => (
   </div>
 );
 
-const SingleMatch = ({match, index, username}) => {
+const SingleMatch = ({match, username}) => {
   const playerWon = match.winner_username === username ? true : false;
   const playerScore = !playerWon ? match.loser_score : match.winner_score;
   const otherUsername = playerWon ?
@@ -24,7 +24,7 @@ const SingleMatch = ({match, index, username}) => {
     playerWon ? 'matchWin' : 'matchLoss';
 
   return (
-    <div className={`singleMatchResult ${resultClass}`} key={index}>
+    <div className={`singleMatchResult ${resultClass}`}>
       {username} {playerScore} - {otherScore} <Link to={`/users/${otherId}`}>{otherUsername}</Link>
     </div>
   );
@@ -41,7 +41,7 @@ const MatchList = ({matches, username}) => {
         <div>{username}{possessive} last {matches.length} matches:</div>
         {matches.map(
           (match, index) => <SingleMatch
-            match={match} index={index} username={username}
+            match={match} username={username} key={index}
           />
         )}
       </div>

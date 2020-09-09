@@ -26,3 +26,14 @@ export const refreshTokenAndData = async token => {
     return null;
   }
 };
+
+export const apiLogin = async () => {
+  try {
+    const result = await axios.post(config.baseUrl + '/auth/apiLogin');
+    return result.data;
+  } catch(err) {
+    console.error(err);
+    alert('Couldn\'t authenticate through API.');
+    return null;
+  }
+};
