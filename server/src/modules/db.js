@@ -9,7 +9,9 @@ const pool = new Pool({
   max: config.max,
   idleTimeoutMillis: config.idleTimeoutMillis,
   connectionTimeoutMillis: config.connectionTimeoutMillis,
-  ssl: {rejectUnauthorized: false}
+  ssl: config.env === 'test' ?
+    false :
+    {rejectUnauthorized: false}
 });
 
 module.exports = pool;

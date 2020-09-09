@@ -61,7 +61,8 @@ const structureMatchInput = async (match, submitter) => {
 const checkMatchDataSurfaceValidity = match => {
   if (match.player1 === match.player2)
     throw 'ERR_KSAPPI_INVALID_INPUT Usernames are identical';
-  if (!Number.isInteger(match.score1) || !Number.isInteger(match.score2))
+  else if (!Number.isInteger(match.score1) || !Number.isInteger(match.score2) ||
+    !match.score1 && !match.score2)
     throw `ERR_KSAPPI_INVALID_INPUT
 Invalid score ${match.score1} (${typeof match.score1}) or \
 ${match.score2} (${typeof match.score2})`;

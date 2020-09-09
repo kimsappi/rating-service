@@ -11,5 +11,6 @@ const constants = {
 
 module.exports = {
   ...config,
-  ...constants
+  ...constants,
+  env
 };
