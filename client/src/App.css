@@ -36,3 +36,11 @@
     transform: rotate(360deg);
   }
 }
+
+.profileImage {
+  border-radius: 50%;
+}
+
+.italic {
+  font-style: italic;
+}

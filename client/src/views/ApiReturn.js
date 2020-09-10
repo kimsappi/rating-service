@@ -17,7 +17,7 @@ const ApiReturn = () => {
       dispatch(loginThroughApi(data.code, history));
       history.push('/?loginSuccess=1');
     }
-  }, [data, dispatch]);
+  }, [data, dispatch, history]);
 
   if (!data || !data.code || !data.state || data.state !== getAuthState())
     return <Redirect to='/?authFailure=1' />

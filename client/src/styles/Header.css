@@ -1,0 +1,11 @@
+header .profileImage {
+  max-height: 100%;
+  margin-right: 10px;
+}
+
+.navbar-nav > a {
+  padding: 0 10px;
+  height: 40px;
+  line-height: 40px;
+  vertical-align: middle;
+}

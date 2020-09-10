@@ -32,7 +32,7 @@ const Auth = () => {
   if (user)
     return (<Redirect to='/' />);
 
-  else if (process.env.NODE_ENV === 'production')
+  else if (process.env.NODE_ENV === 'development')
     return (
       <a href={apiAuthUrl}><button>Log in with 42</button></a>
     );

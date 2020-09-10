@@ -8,6 +8,8 @@ const logInAction = (data, history) => {
   setUser(data);
   if (data)
     history.push('/?loginSuccess=1');
+  else
+    history.push('/?loginFailure=1');
   return {
     type: 'LOG_IN',
     data: data
@@ -39,13 +41,14 @@ export const loginThroughApi = (code, history) => {
   };
 };
 
-export const checkUserLoginOnLoad = () => {
+export const checkUserLoginOnLoad = history => {
   return async dispatch => {
     const data = getUser();
     try {
       const newData = await refreshTokenAndData(data.token);
-      dispatch(logInAction(newData));
+      dispatch(logInAction(newData, history));
     } catch(err) {
+      console.log(err);
       dispatch(logOut());
     }
   }

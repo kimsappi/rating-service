@@ -3,18 +3,26 @@ import { Link, useHistory } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { Alert } from 'react-bootstrap';
 
-import { fetchUsers } from '../../reducers/allUsers';
-import parseSearchString from '../../utils/parseSearchString';
+import { fetchUsers } from '../reducers/allUsers';
+import parseSearchString from '../utils/parseSearchString';
+
+import '../styles/Index.css';
+import ProfileImage from '../components/ProfileImage';
 
 const NotLoggedIn = () => (
   <div>You must <Link to='/auth'>log in</Link> to access the service!</div>
 );
 
-const RankingCard = (user, rank, me) => (
-  <div key={rank}>
-    {rank}. {user.username} {user.rating} {me.id === user.id && 'That\'s me!'}
-  </div>
-);
+const RankingCard = (user, rank, me) => {
+  const rankClasses = ['italic', 'indexRank', me.id === user.id && 'myRank'];
+  return (
+    <Link to={`/users/${user.id}`} className='indexRankingCard' key={rank}>
+      <div className={rankClasses.join(' ')}>#{rank}</div>
+      <ProfileImage url={user.imageurl} />
+      <div className='indexRank' style={{paddingLeft: '10px'}}>{user.username}</div>
+    </Link>
+  )
+};
 
 const LoggedIn = ({user}) => {
   const dispatch = useDispatch();
@@ -50,6 +58,12 @@ const Notifications = ({searchArr}) => {
       variant: 'success'
     });
 
+  if (searchArr.loginFailure)
+    ret.push({
+      text: 'Login failure!',
+      variant: 'danger'
+    });
+
   return ret.map((item, index) =>
     <Alert key={index} variant={item.variant}>{item.text}</Alert>
   );
@@ -67,7 +81,9 @@ const Index = () => {
     history.push('/');
     // Clear notifications after 5 seconds
     setTimeout(() => setSearchArr(null), 5000);
-  }, [history]);
+  }, [history, window.location.href]); /* eslint-disable-line react-hooks/exhaustive-deps */
+  // Previous effect would sometimes not push the history correctly without
+  // window.location.href in the dependency array, and eslint complained about it
 
   return (
     <div>
