@@ -56,8 +56,8 @@ CREATE OR REPLACE FUNCTION update_ratings_post_match()
   AS
 $$
 BEGIN
-  UPDATE users SET rating = rating + NEW.rating_change WHERE id = NEW.winner;
-  UPDATE users SET rating = rating - NEW.rating_change WHERE id = NEW.loser;
+  UPDATE users SET rating = rating + NEW.rating_change, active = TRUE WHERE id = NEW.winner;
+  UPDATE users SET rating = rating - NEW.rating_change, active = TRUE WHERE id = NEW.loser;
   RETURN NEW;
 END;
 $$;

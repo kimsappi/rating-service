@@ -1,8 +1,8 @@
 import { fetchAllUsers } from '../services/allUsers';
 
-export const fetchUsers = token => {
+export const fetchUsers = (token, alphaSort = false) => {
   return async dispatch => {
-    const data = await fetchAllUsers(token);
+    const data = await fetchAllUsers(token, alphaSort);
     dispatch({
       type: 'SET_USERS',
       data: data

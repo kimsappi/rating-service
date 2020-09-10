@@ -8,8 +8,9 @@ const {
 
 /* GET users */
 router.get('/', async (req, res, next) => {
+  const alphaSort = req.query.sort && req.query.sort === 'alpha' ? true : false;
   try {
-    const results = await getAllActiveOrderedByRating();
+    const results = await getAllActiveOrderedByRating(alphaSort);
     return res.status(200).json(results);
   } catch(err) {
     console.error(err);

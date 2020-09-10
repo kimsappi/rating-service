@@ -32,11 +32,13 @@ const getSingleUserProfileData = async id => {
   };
 };
 
-const getAllActiveOrderedByRating = async () => {
+const getAllActiveOrderedByRating = async alphaSort => {
+  const orderBy = alphaSort ? '"username" ASC' : 'rating DESC';
   const query = `
-SELECT id, username, rating, imageUrl
+SELECT id, username, imageUrl
   FROM users
-  ORDER BY rating DESC;`;
+  WHERE active = TRUE
+  ORDER BY ${orderBy};`;
   const {rows} = await pool.query(query);
   return rows;
 };

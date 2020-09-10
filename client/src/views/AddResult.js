@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import Autosuggest from 'react-autosuggest';
 import { useHistory } from 'react-router-dom';
+import { Alert } from 'react-bootstrap';
 
 import { fetchUsers } from '../reducers/allUsers';
 
@@ -121,7 +122,7 @@ const AddResult = () => {
   useEffect(() => {
     if (user) {
       setPlayer1(user.username);
-      dispatch(fetchUsers(user.token));
+      dispatch(fetchUsers(user.token, true));
     }
   }, [user, dispatch]);
 
@@ -140,25 +141,28 @@ ${player1} ${score1} - ${score2} ${player2}?`)) {
   };
 
   return (
-    <form onSubmit={submitScore}>
-      <PlayerInput
-        player={player1} setPlayer={setPlayer1}
-        label='Player 1' name='player1' users={users}
-      />
-      <ScoreInput
-        score={score1} setScore={setScore1}
-        label='Player 1' name='score1'
-      />
-      <PlayerInput
-        player={player2} setPlayer={setPlayer2}
-        label='Player 2' name='player2' users={users}
-      />
-      <ScoreInput
-        score={score2} setScore={setScore2}
-        label='Player 2' name='score2'
-      />
-      <input type='submit' name='submit' value='OK' />
-    </form>
+    <>
+      <Alert variant='primary'>Inactive users aren't suggested automatically, just enter their login!</Alert>
+      <form onSubmit={submitScore}>
+        <PlayerInput
+          player={player1} setPlayer={setPlayer1}
+          label='Player 1' name='player1' users={users}
+        />
+        <ScoreInput
+          score={score1} setScore={setScore1}
+          label='Player 1' name='score1'
+        />
+        <PlayerInput
+          player={player2} setPlayer={setPlayer2}
+          label='Player 2' name='player2' users={users}
+        />
+        <ScoreInput
+          score={score2} setScore={setScore2}
+          label='Player 2' name='score2'
+        />
+        <input type='submit' name='submit' value='OK' />
+      </form>
+    </>
   );
 };
 
