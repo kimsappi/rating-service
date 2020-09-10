@@ -1,6 +1,7 @@
 import React from 'react';
 import { Redirect, useHistory } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
+import { Button } from 'react-bootstrap';
 
 import { createGuest } from '../reducers/user';
 import * as config from '../config.json';
@@ -34,7 +35,17 @@ const Auth = () => {
 
   else if (process.env.NODE_ENV === 'development')
     return (
-      <a href={apiAuthUrl}><button>Log in with 42</button></a>
+      <>
+        <div>
+          Click the button below to authenticate with the 42 API. The information we store is:
+          <ul>
+            <li>Your 42 username and ID</li>
+            <li>Your first and last names</li>
+            <li>The URL to your image on the 42 CDN</li>
+          </ul>
+        </div>
+        <a href={apiAuthUrl}><Button variant='outline-primary'>Log in with 42 API</Button></a>
+      </>
     );
   
   else

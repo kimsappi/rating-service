@@ -9,9 +9,18 @@
 }
 
 .matchWin {
-  background-color: #ccf;
+  background-color: #ddf;
 }
 
 .matchDraw {
   background-color: #eea;
+}
+
+.generalProfile {
+  margin-bottom: 30px;
+}
+
+.generalProfile img {
+  max-height: 100px;
+  margin-right: 20px;
 }

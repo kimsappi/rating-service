@@ -3,12 +3,18 @@ import { useParams, Link } from 'react-router-dom';
 import getProfileData from '../services/profile';
 import { useSelector } from 'react-redux';
 
+import ProfileImage from '../components/ProfileImage';
+
 import '../styles/Profile.css';
 
 const GeneralProfileData = ({data}) => (
-  <div>
-    <div>{data.username}</div>
-    <div>Matches played: {data.match_count}</div>
+  <div className='flexRow noWrap generalProfile'>
+    <ProfileImage url={data.imageurl} />
+    <div className='flexCol noWrap'>
+      <h3>{data.username}</h3>
+      <div>{data.firstname}</div>
+      <div>Total matches played: <span className='bold'>{data.match_count}</span></div>
+    </div>
   </div>
 );
 
@@ -23,9 +29,11 @@ const SingleMatch = ({match, username}) => {
   const resultClass = match.draw ? 'matchDraw' :
     playerWon ? 'matchWin' : 'matchLoss';
 
+  const localDate = new Date(match.time).toLocaleDateString();
+
   return (
     <div className={`singleMatchResult ${resultClass}`}>
-      {username} {playerScore} - {otherScore} <Link to={`/users/${otherId}`}>{otherUsername}</Link>
+      {localDate} {username} <span className='bold'>{playerScore} - {otherScore}</span> <Link to={`/users/${otherId}`}>{otherUsername}</Link>
     </div>
   );
 };

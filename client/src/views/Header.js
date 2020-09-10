@@ -38,7 +38,10 @@ const LoggedIn = ({ user }) => {
 
 const NotLoggedIn = () => (
   <Navbar bg='light' variant='light'>
-    <Link to='/auth'>Log in/Register</Link>
+    <Nav className='mr-auto'></Nav>
+    <Nav>
+      <Link to='/auth'>Log in/Register</Link>
+    </Nav>
   </Navbar>
 );
 

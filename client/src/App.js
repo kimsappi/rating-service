@@ -9,11 +9,13 @@ import Auth from './views/Auth';
 import AddResult from './views/AddResult';
 import Profile from './views/Profile';
 import ApiReturn from './views/ApiReturn';
+import AddResultFixedButton from './views/AddResultFIxedButton';
 
 import { checkUserLoginOnLoad } from './reducers/user';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 const App = () => {
+  const user = useSelector(state => state.user);
   const dispatch = useDispatch();
   const history = useHistory();
 
@@ -36,6 +38,8 @@ const App = () => {
         <Route path='/users/:id' component={Profile} />
         <Route path='/' component={Index} />
       </Switch>
+
+      {user && <AddResultFixedButton />}
     </>
   );
 };

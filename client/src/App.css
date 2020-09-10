@@ -44,3 +44,27 @@
 .italic {
   font-style: italic;
 }
+
+.bold {
+  font-weight: bold;
+}
+
+.flexRow {
+  display: flex;
+  flex-direction: row;
+}
+
+.flexCol {
+  display: flex;
+  flex-direction: column;
+}
+
+.noWrap {
+  flex-wrap: nowrap;
+}
+
+.square:after {
+  content: '';
+  display: block;
+  padding-bottom: 100%;
+}
