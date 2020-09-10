@@ -44,6 +44,12 @@ const Notifications = ({searchArr}) => {
       variant: 'success'
     });
 
+  if (searchArr.loginSuccess)
+    ret.push({
+      text: 'Login success!',
+      variant: 'success'
+    });
+
   return ret.map((item, index) =>
     <Alert key={index} variant={item.variant}>{item.text}</Alert>
   );

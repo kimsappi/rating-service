@@ -4,8 +4,10 @@ import {
   apiLogin } from '../services/auth';
 import { setUser, getUser } from '../utils/localStorageActions';
 
-const logInAction = data => {
+const logInAction = (data, history) => {
   setUser(data);
+  if (data)
+    history.push('/?loginSuccess=1');
   return {
     type: 'LOG_IN',
     data: data
@@ -23,17 +25,17 @@ export const logOut = () => {
   }
 };
 
-export const createGuest = () => {
+export const createGuest = history => {
   return async dispatch => {
     const data = await createGuestAccount();
-    dispatch(logInAction(data));
+    dispatch(logInAction(data, history));
   };
 };
 
-export const loginThroughApi = code => {
+export const loginThroughApi = (code, history) => {
   return async dispatch => {
     const data = await apiLogin(code);
-    dispatch(logInAction(data));
+    dispatch(logInAction(data, history));
   };
 };
 

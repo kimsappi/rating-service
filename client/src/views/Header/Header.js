@@ -1,22 +1,23 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { Nav } from 'react-bootstrap';
 
 import { logOut } from '../../reducers/user';
 
 const LoggedIn = ({ user }) => {
   const dispatch = useDispatch();
 
-  const logOutButton = () => {
+  const logOutButton = event => {
+    event.preventDefault();
     dispatch(logOut());
   };
 
   return (
     <>
-      <div>Logged in as {user.username}</div>
-      <button onClick={logOutButton}>Log out</button>
+      <Link to='#' onClick={logOutButton}>Log out</Link>
       <Link to='/new'>Submit new result</Link>
-      <Link to='/users/me'>Profile</Link>
+      <Link to='/users/me' style={{fontWeight: 'bold'}}>{user.username}</Link>
     </>
   );
 };
@@ -32,7 +33,9 @@ const Header = () => {
 
   return (
     <header>
-      {user ? <LoggedIn user={user} /> : <NotLoggedIn />}
+      <Nav className='navbar navbar-expand-lg navbar-light bg-light'>
+        {user ? <LoggedIn user={user} /> : <NotLoggedIn />}
+      </Nav>
     </header>
   );
 };

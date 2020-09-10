@@ -1,5 +1,5 @@
 import React from 'react';
-import { Redirect } from 'react-router-dom';
+import { Redirect, useHistory } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 
 import { createGuest } from '../reducers/user';
@@ -8,11 +8,13 @@ import { setAuthState } from '../utils/localStorageActions';
 
 const Auth = () => {
   const dispatch = useDispatch();
+  const history = useHistory();
+
   const user = useSelector(state => state.user);
 
   const createGuestAccount = () => {
-    dispatch(createGuest());
-  }
+    dispatch(createGuest(history));
+  };
 
   const chars = 'qwertyuiopasdfghjklzxcvbnm1234567890';
   const authState = [...chars].map((char, index, array) => {
@@ -24,12 +26,13 @@ const Auth = () => {
   setAuthState(authState);
 
   const apiAuthUrl = config.apiAuthUrl[0] + config.apiClientId
-    + config.apiAuthUrl[1] + config.apiRedirectUrl + config.apiAuthUrl[2] + authState;
+    + config.apiAuthUrl[1] + config.apiRedirectUrl + config.apiAuthUrl[2]
+    + authState;
 
   if (user)
     return (<Redirect to='/' />);
 
-  else if (process.env.NODE_ENV === 'development')
+  else if (process.env.NODE_ENV === 'production')
     return (
       <a href={apiAuthUrl}><button>Log in with 42</button></a>
     );
