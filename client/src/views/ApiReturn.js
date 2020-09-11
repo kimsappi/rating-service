@@ -15,12 +15,11 @@ const ApiReturn = () => {
     console.log(data);
     if (data) {
       dispatch(loginThroughApi(data.code, history));
-      history.push('/?loginSuccess=1');
     }
   }, [data, dispatch, history]);
 
   if (!data || !data.code || !data.state || data.state !== getAuthState())
-    return <Redirect to='/?authFailure=1' />
+    return <Redirect to='/?loginFailure=1' />
 
   return (<div>Logging in</div>);
 };

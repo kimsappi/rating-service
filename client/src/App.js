@@ -34,7 +34,7 @@ const App = () => {
             This is a development environment!
         </Alert>
       }
-      <div class='container'>
+      <div className='container'>
         <Switch>
           <Route path='/auth' component={Auth} />
           <Route path='/apiReturn' component={ApiReturn} />

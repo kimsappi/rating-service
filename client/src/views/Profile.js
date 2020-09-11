@@ -12,7 +12,6 @@ const GeneralProfileData = ({data}) => (
     <ProfileImage url={data.imageurl} />
     <div className='flexCol noWrap'>
       <h3>{data.username}</h3>
-      <div>{data.firstname}</div>
       <div>Total matches played: <span className='bold'>{data.match_count}</span></div>
     </div>
   </div>

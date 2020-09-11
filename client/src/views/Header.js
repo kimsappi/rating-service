@@ -40,7 +40,7 @@ const LoggedIn = ({ user }) => {
 
 const NotLoggedIn = () => (
   <Navbar bg='light' variant='light'>
-    <div class='container'>
+    <div className='container'>
       <Nav className='mr-auto'></Nav>
       <Nav>
         <Link to='/auth'>Log in/Register</Link>
@@ -53,7 +53,7 @@ const Header = () => {
   const user = useSelector(state => state.user);
 
   return (
-    <header class='navbar-static-top'>
+    <header className='navbar-static-top'>
         {user ? <LoggedIn user={user} /> : <NotLoggedIn />}
     </header>
   );

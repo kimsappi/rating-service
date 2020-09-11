@@ -11,7 +11,6 @@ export const fetchUsers = (token, alphaSort = false) => {
 };
 
 const allUsersReducer = (state = null, action) => {
-  console.log(action);
   switch (action.type) {
     case 'SET_USERS':
       return action.data;

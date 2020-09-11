@@ -40,8 +40,7 @@ const Auth = () => {
           Click the button below to authenticate with the 42 API. The information we store is:
           <ul>
             <li>Your 42 username and ID</li>
-            <li>Your first and last names</li>
-            <li>The URL to your image on the 42 CDN</li>
+            <li>The URL of your image on the 42 CDN</li>
           </ul>
         </div>
         <a href={apiAuthUrl}><Button variant='outline-primary'>Log in with 42 API</Button></a>

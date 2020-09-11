@@ -44,8 +44,8 @@ const apiLogin = async token => {
       return user;
     else {
       const createdUser = await createAccount(
-        userData.id, userData.login, userData.first_name,
-        userData.last_name, userData.image_url
+        userData.id, userData.login, null,
+        null, userData.image_url
       );
       return createdUser;
     }

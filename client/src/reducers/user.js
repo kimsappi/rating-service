@@ -55,8 +55,6 @@ export const checkUserLoginOnLoad = history => {
 };
 
 const userReducer = (state = null, action) => {
-  console.log(state);
-  console.log(action);
   switch (action.type) {
     case 'LOG_IN':
       return action.data;
