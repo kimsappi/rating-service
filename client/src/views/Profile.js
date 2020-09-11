@@ -32,8 +32,11 @@ const SingleMatch = ({match, username}) => {
   const localDate = new Date(match.time).toLocaleDateString();
 
   return (
-    <div className={`singleMatchResult ${resultClass}`}>
-      {localDate} {username} <span className='bold'>{playerScore} - {otherScore}</span> <Link to={`/users/${otherId}`}>{otherUsername}</Link>
+    <div className={`singleMatchResult row ${resultClass}`}>
+      <div className='col-3 col-md-2'>{localDate}</div>
+      <div className='col-3 col-md-2'>{username}</div>
+      <div className='bold col-3 col-md-2'>{playerScore} - {otherScore}</div>
+      <div className='col-3 col-md-2'><Link to={`/users/${otherId}`}>{otherUsername}</Link></div>
     </div>
   );
 };

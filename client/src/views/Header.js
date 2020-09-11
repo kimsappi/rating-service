@@ -17,31 +17,35 @@ const LoggedIn = ({ user }) => {
   };
 
   return (
-    <Navbar expand='md' bg='light' variant='light'>
-      <Navbar.Toggle aria-controls='responsive-navbar-nav' />
-      <Navbar.Collapse id='responsive-navbar-nav'>
-        <Nav className='mr-auto'>
-          <Link to='/'>Home</Link>
-          <Link to='/new'>Submit result</Link>
-        </Nav>
-        <Nav>
-          <Link to='#' onClick={logOutButton}>Log out</Link>
-          <Link to='/users/me' style={{fontWeight: 'bold'}}>
-            <ProfileImage url={user.imageurl} />
-            {user.username}
-          </Link>
-        </Nav>
-      </Navbar.Collapse>
+    <Navbar class='navbar-inner' expand='md' bg='light' variant='light'>
+      <div class='container'>
+        <Navbar.Toggle aria-controls='responsive-navbar-nav' />
+        <Navbar.Collapse id='responsive-navbar-nav'>
+          <Nav className='mr-auto'>
+            <Link to='/'>Home</Link>
+            <Link to='/new'>Submit result</Link>
+          </Nav>
+          <Nav>
+            <Link to='#' onClick={logOutButton}>Log out</Link>
+            <Link to='/users/me' style={{fontWeight: 'bold'}}>
+              <ProfileImage url={user.imageurl} />
+              {user.username}
+            </Link>
+          </Nav>
+        </Navbar.Collapse>
+      </div>
     </Navbar>
   );
 };
 
 const NotLoggedIn = () => (
   <Navbar bg='light' variant='light'>
-    <Nav className='mr-auto'></Nav>
-    <Nav>
-      <Link to='/auth'>Log in/Register</Link>
-    </Nav>
+    <div class='container'>
+      <Nav className='mr-auto'></Nav>
+      <Nav>
+        <Link to='/auth'>Log in/Register</Link>
+      </Nav>
+    </div>
   </Navbar>
 );
 
@@ -49,7 +53,7 @@ const Header = () => {
   const user = useSelector(state => state.user);
 
   return (
-    <header>
+    <header class='navbar-static-top'>
         {user ? <LoggedIn user={user} /> : <NotLoggedIn />}
     </header>
   );

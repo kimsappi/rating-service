@@ -2,14 +2,13 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 const style = {
-  content: '+',
   position: 'fixed',
   right: '10px',
   bottom: '10px',
   borderRadius: '50%',
   fontSize: '2em',
   fontWeight: 'bold',
-  backgroundColor: 'blue',
+  backgroundColor: 'dodgerblue',
   color: 'whitesmoke',
   height: '40px',
   width: '40px',

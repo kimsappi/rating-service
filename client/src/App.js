@@ -29,17 +29,22 @@ const App = () => {
       <Header />
       {
         process.env.NODE_ENV === 'development' &&
-        <Alert variant='warning'>This is a development environment!</Alert>
+        <Alert variant='warning'
+          style={{textAlign: 'center'}}>
+            This is a development environment!
+        </Alert>
       }
-      <Switch>
-        <Route path='/auth' component={Auth} />
-        <Route path='/apiReturn' component={ApiReturn} />
-        <Route path='/new' component={AddResult} />
-        <Route path='/users/:id' component={Profile} />
-        <Route path='/' component={Index} />
-      </Switch>
+      <div class='container'>
+        <Switch>
+          <Route path='/auth' component={Auth} />
+          <Route path='/apiReturn' component={ApiReturn} />
+          <Route path='/new' component={AddResult} />
+          <Route path='/users/:id' component={Profile} />
+          <Route path='/' component={Index} />
+        </Switch>
 
-      {user && <AddResultFixedButton />}
+        {user && <AddResultFixedButton />}
+      </div>
     </>
   );
 };

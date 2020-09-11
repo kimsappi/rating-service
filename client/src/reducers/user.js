@@ -4,11 +4,11 @@ import {
   apiLogin } from '../services/auth';
 import { setUser, getUser } from '../utils/localStorageActions';
 
-const logInAction = (data, history) => {
+const logInAction = (data, history, redirect = false) => {
   setUser(data);
-  if (data)
+  if (data && redirect)
     history.push('/?loginSuccess=1');
-  else
+  else if (redirect)
     history.push('/?loginFailure=1');
   return {
     type: 'LOG_IN',
@@ -30,14 +30,14 @@ export const logOut = () => {
 export const createGuest = history => {
   return async dispatch => {
     const data = await createGuestAccount();
-    dispatch(logInAction(data, history));
+    dispatch(logInAction(data, history, true));
   };
 };
 
 export const loginThroughApi = (code, history) => {
   return async dispatch => {
     const data = await apiLogin(code);
-    dispatch(logInAction(data, history));
+    dispatch(logInAction(data, history, true));
   };
 };
 
