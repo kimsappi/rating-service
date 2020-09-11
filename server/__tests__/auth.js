@@ -50,7 +50,7 @@ describe('Token refreshing', () => {
   test('Refreshing without a valid token fails', async () => {
     const response = await api
       .get('/api/refreshToken')
-      .set('Authorization', `bearer none`)
+      .set('Authorization', 'bearer none')
       .expect(401);
 
     const error = response.body;
@@ -67,4 +67,4 @@ describe('Token refreshing', () => {
     };
     initialiseAccount();
   });
-})
+});

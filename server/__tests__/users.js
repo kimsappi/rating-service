@@ -74,4 +74,4 @@ describe('Fetching a single user\'s data', () => {
     };
     initialiseAccount();
   });
-})
+});

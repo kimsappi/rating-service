@@ -30,7 +30,7 @@ const getIndividualUserData = async id => {
   const query = {
     text: 'SELECT * FROM users WHERE id=$1;',
     values: [id],
-    name: `Query user`
+    name: 'Query user'
   };
   const {rows} = await pool.query(query);
   return rows[0];

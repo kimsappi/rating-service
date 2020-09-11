@@ -21,7 +21,7 @@ const getUserFromApi = async token => {
     headers: {Authorization: `Bearer ${token}`}
   });
   return res.data;
-}
+};
 
 module.exports = {
   getToken,

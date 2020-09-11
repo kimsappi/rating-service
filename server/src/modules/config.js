@@ -8,7 +8,7 @@ const constants = {
   connectionTimeoutMillis: 10000,
   tokenExpiry: '7d',
   authApiUrl: 'https://api.intra.42.fr'
-}
+};
 
 module.exports = {
   ...config,

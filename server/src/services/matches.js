@@ -8,8 +8,8 @@ class PlayerAndScore {
     this.score = score;
     this.id = id;
     this.rating = rating;
-  };
-};
+  }
+}
 
 const matchUserNameToId = (current, needle) => 
   current.username === needle;

@@ -21,4 +21,4 @@ const calculateRatingChange = (winner, loser) => {
 
 module.exports = {
   calculateRatingChange
-}
+};
