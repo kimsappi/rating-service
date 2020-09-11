@@ -1,5 +1,5 @@
 import axios from 'axios';
-import * as config from '../config.json';
+import config from '../utils/config.js';
 import { getAuthHeader } from '../utils/auth';
 
 export const fetchAllUsers = async (token, alphaSort) => {

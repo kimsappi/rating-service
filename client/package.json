@@ -20,7 +20,10 @@
   "scripts": {
     "start": "NODE_ENV=production react-scripts start",
     "dev": "NODE_ENV=development react-scripts start",
-    "build": "react-scripts build",
+    "build": "NODE_ENV=production react-scripts build",
+    "build-dev": "NODE_ENV=development react-scripts build",
+    "postbuild": "rm -rf ../server/public/* && mv build/* ../server/public",
+    "postbuild-dev": "rm -rf ../server/public/* && mv build/* ../server/public",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "lint": "eslint . --fix"

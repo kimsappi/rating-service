@@ -1,5 +1,5 @@
 import axios from 'axios';
-import * as config from '../config.json';
+import config from '../utils/config.js';
 import { getAuthHeader } from '../utils/auth';
 
 export const sendScore = async (player1, player2, score1, score2, user) => {

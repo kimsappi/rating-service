@@ -18,7 +18,7 @@ if (process.env.NODE_ENV === 'development' || process.env.NODE_ENV === 'test') {
   });
 }
 
-if (process.env.NODE_ENV === 'production' || process.env.NODE_ENV === 'development') {
+if (process.env.NODE_ENV === 'production') {
   router.post('/apiLogin', async (req, res, next) => {
     try {
       const token = await tokenService.getToken(req.body.code);

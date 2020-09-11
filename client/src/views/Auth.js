@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { Button } from 'react-bootstrap';
 
 import { createGuest } from '../reducers/user';
-import * as config from '../config.json';
+import config from '../utils/config.js';
 import { setAuthState } from '../utils/localStorageActions';
 
 const Auth = () => {
@@ -27,13 +27,13 @@ const Auth = () => {
   setAuthState(authState);
 
   const apiAuthUrl = config.apiAuthUrl[0] + config.apiClientId
-    + config.apiAuthUrl[1] + config.apiRedirectUrl + config.apiAuthUrl[2]
-    + authState;
+    + config.apiAuthUrl[1] + config.apiRedirectUrl
+    + config.apiAuthUrl[2] + authState;
 
   if (user)
     return (<Redirect to='/' />);
 
-  else if (process.env.NODE_ENV === 'development')
+  else if (process.env.NODE_ENV === 'production')
     return (
       <>
         <div>
@@ -50,8 +50,8 @@ const Auth = () => {
   else
     return (
       <div>
-        <p>Development environment, please generate a guest account</p>
-        <button onClick={createGuestAccount}>Use guest account</button>
+        <p>Development environment, please generate a guest account:</p>
+        <Button variant='primary' onClick={createGuestAccount}>Use guest account</Button>
       </div>
     );
 };
