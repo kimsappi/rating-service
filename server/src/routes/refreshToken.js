@@ -3,6 +3,9 @@ var router = express.Router();
 
 const authService = require('../services/auth');
 const { generateJWT } = require('../modules/auth');
+const { authenticationMiddleware } = require('../modules/auth');
+
+router.use(authenticationMiddleware);
 
 router.get('/', async (req, res, next) => {
   try {

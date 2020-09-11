@@ -5,8 +5,6 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 const cors = require('cors');
 
-const { authenticationMiddleware } = require('./modules/auth');
-
 var authRouter = require('./routes/auth');
 var usersRouter = require('./routes/users');
 var matchesRouter = require('./routes/matches');
@@ -25,10 +23,16 @@ app.use(cors());
 app.use('/api/auth', authRouter);
 
 // Routes requiring auth
-app.use(authenticationMiddleware);
 app.use('/api/users', usersRouter);
 app.use('/api/matches', matchesRouter);
 app.use('/api/refreshToken', refreshTokenRouter);
+
+// Allow refreshing React routes
+app.get('*', (req, res, next) => 
+  res.sendFile('index.html', {
+    root: 'public/'
+  })
+);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -37,6 +41,7 @@ app.use(function(req, res, next) {
 
 // error handler
 app.use(function(err, req, res, next) {
+  console.log(err);
   // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};

@@ -5,6 +5,9 @@ const {
   getAllActiveOrderedByRating,
   getSingleUserProfileData
 } = require('../services/users');
+const { authenticationMiddleware } = require('../modules/auth');
+
+router.use(authenticationMiddleware);
 
 /* GET users */
 router.get('/', async (req, res, next) => {
