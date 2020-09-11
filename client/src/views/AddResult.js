@@ -144,8 +144,8 @@ ${player1} ${score1} - ${score2} ${player2}?`)) {
     <>
       <Alert variant='primary'>Inactive users aren't suggested automatically, just enter their login!</Alert>
       <form onSubmit={submitScore}>
-        <div class='row'>
-          <div class='col-12 col-md-6'>
+        <div className='row'>
+          <div className='col-12 col-md-6'>
             <PlayerInput
               player={player1} setPlayer={setPlayer1}
               label='Player 1' name='player1' users={users}
@@ -155,7 +155,7 @@ ${player1} ${score1} - ${score2} ${player2}?`)) {
               label='Player 1' name='score1'
             />
           </div>
-          <div class='col-12 col-md-6'>
+          <div className='col-12 col-md-6'>
             <PlayerInput
               player={player2} setPlayer={setPlayer2}
               label='Player 2' name='player2' users={users}

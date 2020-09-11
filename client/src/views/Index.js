@@ -64,6 +64,12 @@ const Notifications = ({searchArr}) => {
       variant: 'danger'
     });
 
+  if (searchArr.loggedOut)
+    ret.push({
+      text: 'Logged out',
+      variant: 'success'
+    });
+
   return ret.map((item, index) =>
     <Alert key={index} variant={item.variant}>{item.text}</Alert>
   );

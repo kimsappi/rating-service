@@ -16,8 +16,9 @@ const logInAction = (data, history, redirect = false) => {
   };
 };
 
-export const logOut = () => {
+export const logOut = history => {
   return dispatch => {
+    history.push('/?loggedOut=1');
     const data = null;
     setUser(data);
     dispatch({
@@ -49,7 +50,7 @@ export const checkUserLoginOnLoad = history => {
       dispatch(logInAction(newData, history));
     } catch(err) {
       console.log(err);
-      dispatch(logOut());
+      dispatch(logOut(history));
     }
   }
 };

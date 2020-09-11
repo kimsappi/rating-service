@@ -1,6 +1,6 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import { Navbar, Nav } from 'react-bootstrap';
 
 import { logOut } from '../reducers/user';
@@ -10,10 +10,11 @@ import '../styles/Header.css';
 
 const LoggedIn = ({ user }) => {
   const dispatch = useDispatch();
+  const history = useHistory();
 
   const logOutButton = event => {
     event.preventDefault();
-    dispatch(logOut());
+    dispatch(logOut(history));
   };
 
   return (
@@ -41,7 +42,9 @@ const LoggedIn = ({ user }) => {
 const NotLoggedIn = () => (
   <Navbar bg='light' variant='light'>
     <div className='container'>
-      <Nav className='mr-auto'></Nav>
+      <Nav className='mr-auto'>
+        <Link to='/'>Home</Link>
+      </Nav>
       <Nav>
         <Link to='/auth'>Log in/Register</Link>
       </Nav>

@@ -3,6 +3,7 @@ import { fetchAllUsers } from '../services/allUsers';
 export const fetchUsers = (token, alphaSort = false) => {
   return async dispatch => {
     const data = await fetchAllUsers(token, alphaSort);
+    console.warn(data);
     dispatch({
       type: 'SET_USERS',
       data: data

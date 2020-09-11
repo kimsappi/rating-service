@@ -28,11 +28,15 @@ const createGuestAccount = async () => {
 
 const getIndividualUserData = async id => {
   const query = {
-    text: 'SELECT * FROM users WHERE id=$1;',
+    text: `SELECT * FROM users LEFT JOIN bans ON user_id = id
+      WHERE id=$1;`,
     values: [id],
     name: 'Query user'
   };
   const {rows} = await pool.query(query);
+  // user is banned
+  if (rows[0].user_id)
+    throw(`User ${rows[0].id} is banned.`);
   return rows[0];
 };
 

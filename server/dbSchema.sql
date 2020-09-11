@@ -30,10 +30,9 @@ CREATE TABLE IF NOT EXISTS matches(
   FOREIGN KEY (submitter) REFERENCES users(id)
 );
 
-DROP TABLE IF EXISTS bans;
 CREATE TABLE IF NOT EXISTS bans(
-  id INT PRIMARY KEY,
-  FOREIGN KEY (id) REFERENCES users(id)
+  user_id INT PRIMARY KEY,
+  FOREIGN KEY (user_id) REFERENCES users(id)
 );
 
 -- Return data about a match and the users associated with it
