@@ -1,5 +1,17 @@
-form > label {
+form {
+  margin-left: auto;
+  margin-right: auto;
+  min-width: '100px';
   display: block;
+}
+
+form > * {
+  margin: auto;
+}
+
+form label {
+  display: block;
+  margin-top: 10px;
 }
 
 form input[type=text] {

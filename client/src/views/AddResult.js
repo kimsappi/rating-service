@@ -48,7 +48,7 @@ const PlayerInput = ({player, setPlayer, label, name, users}) => {
 
   return (
     <>
-      <label htmlFor={name}>{label}</label>
+      <label htmlFor={name} className='bold'>{label}</label>
       <Autosuggest
         suggestions={matchingUsers}
         inputProps={inputProps}
@@ -61,7 +61,7 @@ const PlayerInput = ({player, setPlayer, label, name, users}) => {
   );
 };
 
-const ScoreInput = ({score, setScore, label, name}) => {
+const ScoreInput = ({score, setScore, name}) => {
   const changeHandler = event => {
     try {
       const scoreInt = parseInt(event.target.value);
@@ -85,7 +85,7 @@ const ScoreInput = ({score, setScore, label, name}) => {
 
   return (
     <>
-      <label htmlFor={name}>{label} score</label>
+      <label htmlFor={name}>Score</label>
       <button onClick={event => buttonHandler(-5, event)}
         className='scoreButton decrease'
       >-5</button>
@@ -144,22 +144,28 @@ ${player1} ${score1} - ${score2} ${player2}?`)) {
     <>
       <Alert variant='primary'>Inactive users aren't suggested automatically, just enter their login!</Alert>
       <form onSubmit={submitScore}>
-        <PlayerInput
-          player={player1} setPlayer={setPlayer1}
-          label='Player 1' name='player1' users={users}
-        />
-        <ScoreInput
-          score={score1} setScore={setScore1}
-          label='Player 1' name='score1'
-        />
-        <PlayerInput
-          player={player2} setPlayer={setPlayer2}
-          label='Player 2' name='player2' users={users}
-        />
-        <ScoreInput
-          score={score2} setScore={setScore2}
-          label='Player 2' name='score2'
-        />
+        <div class='row'>
+          <div class='col-12 col-md-6'>
+            <PlayerInput
+              player={player1} setPlayer={setPlayer1}
+              label='Player 1' name='player1' users={users}
+            />
+            <ScoreInput
+              score={score1} setScore={setScore1}
+              label='Player 1' name='score1'
+            />
+          </div>
+          <div class='col-12 col-md-6'>
+            <PlayerInput
+              player={player2} setPlayer={setPlayer2}
+              label='Player 2' name='player2' users={users}
+            />
+            <ScoreInput
+              score={score2} setScore={setScore2}
+              label='Player 2' name='score2'
+            />
+          </div>
+        </div>
         <input type='submit' name='submit' value='OK' />
       </form>
     </>
