@@ -45,13 +45,17 @@ export const loginThroughApi = (code, history) => {
 export const checkUserLoginOnLoad = history => {
   return async dispatch => {
     const data = getUser();
-    try {
-      const newData = await refreshTokenAndData(data.token);
-      dispatch(logInAction(newData, history));
-    } catch(err) {
-      console.log(err);
-      dispatch(logOut(history));
-    }
+    if (data)
+      try {
+        const newData = await refreshTokenAndData(data.token);
+        dispatch(logInAction(newData, history));
+      } catch(err) {
+        dispatch(logOut(history));
+      }
+    else
+      dispatch({
+        type: 'DO_NOTHING'
+      });
   }
 };
 

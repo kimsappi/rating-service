@@ -1,5 +1,5 @@
 {
-  "baseUrl": "http://localhost:3001/api",
+  "baseUrl": "/api",
   "apiRedirectUrl": "http://localhost:3001/apiReturn",
   "apiClientId": "ca73c29c651fed26fe7ebf621a6abc6ed1afc914fba6bb0054eee84268ab68c3"
 }

@@ -33,7 +33,7 @@ const Auth = () => {
   if (user)
     return (<Redirect to='/' />);
 
-  else if (process.env.NODE_ENV === 'production')
+  else if (process.env.REACT_APP_ENV === 'production')
     return (
       <>
         <div>

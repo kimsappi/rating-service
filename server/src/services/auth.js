@@ -34,7 +34,10 @@ const getIndividualUserData = async id => {
     name: 'Query user'
   };
   const {rows} = await pool.query(query);
-  // user is banned
+  // First time user logs in
+  if (!rows.length)
+    return null;
+  // User is banned
   if (rows[0].user_id)
     throw(`User ${rows[0].id} is banned.`);
   return rows[0];

@@ -18,10 +18,10 @@
     "redux-thunk": "^2.3.0"
   },
   "scripts": {
-    "start": "NODE_ENV=production react-scripts start",
-    "dev": "NODE_ENV=development react-scripts start",
-    "build": "NODE_ENV=production react-scripts build",
-    "build-dev": "NODE_ENV=development react-scripts build",
+    "start": "REACT_APP_ENV=production react-scripts start",
+    "dev": "REACT_APP_ENV=development react-scripts start",
+    "build": "REACT_APP_ENV=production react-scripts build",
+    "build-dev": "REACT_APP_ENV=development react-scripts build",
     "postbuild": "rm -rf ../server/public && mkdir ../server/public && mv build/* ../server/public",
     "postbuild-dev": "rm -rf ../server/public && mkdir ../server/public && mv build/* ../server/public",
     "test": "react-scripts test",
@@ -45,6 +45,7 @@
   },
   "devDependencies": {
     "@typescript-eslint/experimental-utils": "^4.0.1",
+    "cross-spawn": "^7.0.3",
     "eslint": "^6.6.0",
     "eslint-plugin-jest": "^23.20.0",
     "eslint-plugin-react": "^7.20.6",

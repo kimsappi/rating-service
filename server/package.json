@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "start": "NODE_ENV=production node ./src/bin/www",
-    "dev": "NODE_ENV=development nodemon ./src/bin/www",
+    "dev": "NODE_ENV=development node ./src/bin/www",
     "test": "NODE_ENV=test jest --verbose --runInBand",
     "lint": "eslint . --fix"
   },
@@ -28,6 +28,7 @@
     "pg-types": "^3.0.1"
   },
   "devDependencies": {
+    "dotenv": "^8.2.0",
     "eslint": "^7.8.1",
     "import-local": "^3.0.2",
     "jest": "^26.4.2",

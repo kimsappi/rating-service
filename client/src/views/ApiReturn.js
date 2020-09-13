@@ -12,7 +12,6 @@ const ApiReturn = () => {
   const data = parseSearchString(window.location.search);
   
   useEffect(() => {
-    console.log(data);
     if (data) {
       dispatch(loginThroughApi(data.code, history));
     }

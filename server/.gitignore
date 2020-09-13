@@ -1,0 +1,2 @@
+# Another .gitignore, so I can deploy just the server directory
+node_modules

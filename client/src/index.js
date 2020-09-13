@@ -22,8 +22,8 @@ const store = createStore(
   )
 );
 
-if (process.env.NODE_ENV === 'production')
-  console.log = console.warn = console.error = {};
+if (process.env.REACT_APP_ENV === 'production')
+  console.log = console.warn = console.error = () => {};
 
 ReactDOM.render(
   <Provider store={store}>
