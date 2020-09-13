@@ -4,11 +4,16 @@
 React/Node.js Express application for a competitive rating system for e.g. sports.
 
 # Instructions
-1. Clone the repository
-2. Run `./install.sh` or `npm install` in the client and server directories separately
-3. Set up your database (`server/env.test.json` for back-end tests and `server/env.development.json` for a usable build, production environment not implemented yet).
-4. Run `npm run dev` in both `server/` and `client/`. This will start a development server for the server and client respectively. No production environments yet.
-5. The front-end will run at `http://localhost:3000` and the back-end at `http://localhost:3001`
+Note: This assumes a "development" version build with only guest account functionality and your Node.js package manager is `npm`.
+```shell
+git clone https://github.com/kimsappi/rating-service.git
+cd rating-service
+./install.sh # Installs required packages with npm
+npm --prefix client run build-dev # Builds development version of the front-end and moves it to server/public
+export DATABASE_URL=$PostgresConnectionString # The server gets the database address from the environment variable DATABASE_URL in the form:
+# postgres://user:password@host:post/database
+npm --prefix server run dev # Runs development version of the server
+```
+Set up your database. Currently there is no automated method, so you'll have to manually source `server/dbSchema.sql` into Postgres.
 
-# Notes to self
-* Database pool `ssl` value needs to be set to `true` before deployment
+Finally, navigate to `http://localhost:3001` (or `PORT`).
