@@ -3,6 +3,8 @@
 # About
 React/Node.js Express application for a competitive rating system for e.g. sports.
 
+The 'production' version is deployed [here](https://hive-pong.herokuapp.com/) (requires 42 Intra credentials to access) and an anonymous development version is [here](https://hive-pong-dev.herokuapp.com/).
+
 # Instructions
 Note: This assumes a "development" version build with only guest account functionality and your Node.js package manager is `npm`.
 ```shell
