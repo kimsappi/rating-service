@@ -48,7 +48,7 @@ form input[type=text]:focus {
 .react-autosuggest__suggestions-container--open {
   display: block;
   position: absolute;
-  top: 51px;
+  top: 30px;
   width: 240px;
   border: 1px solid #aaa;
   background-color: #fff;

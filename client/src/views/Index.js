@@ -37,7 +37,11 @@ const LoggedIn = ({user}) => {
   else if (!allUsers.length)
     return (<div>No users yet!</div>);
   else
-    return allUsers.map((current, index) => RankingCard(current, index + 1, user));
+    return (
+      <div>
+        {allUsers.map((current, index) => RankingCard(current, index + 1, user))}
+      </div>
+    );
 }
 
 const Notifications = ({searchArr}) => {
